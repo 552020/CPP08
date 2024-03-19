@@ -1,0 +1,90 @@
+#include <algorithm> // For std::find
+#include <vector>	 // Example container
+#include <list>		 // Example container
+#include <iostream>
+#include <stdexcept> // For std::exception
+
+template <typename C>
+bool easyFind(const C &container, int value)
+{
+	// Use std::find to search for the value in the container
+	// std::end(container) is used to get the end iterator for the container
+	// auto it = std::find(std::begin(container), std::end(container), value);
+	// We need to explicitly specify the type of the iterator because the compiler can't deduce it
+	typename C::const_iterator it = std::find(std::begin(container), std::end(container), value);
+
+	// If iterator it is not equal to the end iterator, the value was found
+	bool found = it != std::end(container);
+	return found;
+}
+
+template <typename C>
+void easyFindThrow(const C &container, int value)
+{
+	// Use std::find to search for the value in the container
+	// auto it = std::find(std::begin(container), std::end(container), value);
+	// We need to explicitly specify the type of the iterator because the compiler can't deduce it
+	typename C::const_iterator it = std::find(std::begin(container), std::end(container), value);
+
+	// If iterator it is equal to the end iterator, the value was not found
+	if (it == std::end(container))
+	{
+		throw std::runtime_error("Value not found in the container");
+	}
+}
+#include "easyfind.hpp"
+#include <iostream>
+#include <vector>
+#include <list>
+
+#define SIZE 5
+
+template <typename Container>
+void initializeContainer(Container &container, int size)
+{
+	for (int i = 1; i <= size; ++i)
+	{
+		container.push_back(i);
+	}
+}
+
+int main()
+{
+	// Example usage with std::vector
+	// This works from C++11 onwards
+	// std::vector<int> vec = {1, 2, 3, 4, 5};
+	std::vector<int> vec;
+	initializeContainer(vec, SIZE);
+	std::cout << "Vector: Searching for 3... " << (easyFind(vec, 3) ? "Found" : "Not Found") << std::endl;
+	std::cout << "Vector: Searching for 6... " << (easyFind(vec, 6) ? "Found" : "Not Found") << std::endl;
+
+	// Example usage with std::list
+	// This works from C++11 onwards
+	// std::list<int> lst = {1, 2, 3, 4, 5};
+	std::list<int> lst;
+	initializeContainer(lst, SIZE);
+	std::cout << "List: Searching for 3... " << (easyFind(lst, 3) ? "Found" : "Not Found") << std::endl;
+	std::cout << "List: Searching for 6... " << (easyFind(lst, 6) ? "Found" : "Not Found") << std::endl;
+
+	try
+	{
+		easyFindThrow(vec, 3);
+		std::cout << "Value found." << std::endl;
+	}
+	catch (const std::runtime_error &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	try
+	{
+		easyFindThrow(vec, 6);
+		std::cout << "Value found." << std::endl;
+	}
+	catch (const std::runtime_error &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	return 0;
+}
