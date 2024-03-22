@@ -1,41 +1,75 @@
 #include "Span.hpp"
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
+#include <vector>
+#include <ctime>   // For std::time
+#include <cstdlib> // For std::rand and std::srand
+#include <climits> // Include this for INT_MAX and INT_MIN
 
-void testAddManyFromRange()
+#define MAX_N INT_MAX
+#define MIN_N 0
+#define STEP 1
+
+std::vector<int> createVector(unsigned int n, bool isRandom)
 {
 	std::vector<int> numbers;
-	for (int i = 0; i < 10; ++i)
+
+	if (isRandom)
 	{
-		numbers.push_back(i);
+		// Initialize random seed
+		std::srand(static_cast<unsigned int>(std::time(0)));
+		for (size_t i = 0; i < static_cast<size_t>(n); ++i)
+		{
+			// Generate random number and add to numbers vector
+			int range = MAX_N - MIN_N;
+			int randomNumber = MIN_N + (std::rand() % range + 1);
+			numbers.push_back(randomNumber);
+		}
 	}
-	Span mySpan(5);
+	else
+	{
+		for (size_t i = 0; i < static_cast<size_t>(n); ++i)
+		{
+			numbers.push_back(i * STEP);
+		}
+	}
+	return numbers;
+}
+
+void testAddManyFromRange(unsigned int n, bool isRandom, unsigned int spanSize = 10000)
+{
+
+	std::cout << "Testing addManyFromRange with " << n << (isRandom ? " random" : " not random") << " numbers"
+			  << std::endl;
+	std::vector<int> numbers = createVector(n, isRandom);
+	Span mySpan(spanSize);
 
 	try
 	{
-		// Attempt to add numbers from the vector to the Span
 		mySpan.addManyFromRange(numbers.begin(), numbers.end());
 	}
 	catch (const std::out_of_range &e)
 	{
 		std::cout << "Expected exception caught: " << e.what() << std::endl;
 	}
-
-	std::cout << "Test completed. If no assertion failed and the expected exception was caught, the test is successful."
-			  << std::endl;
+	std::cout << "Shortest span: " << mySpan.shortestSpan() << std::endl;
+	std::cout << "Longest span: " << mySpan.longestSpan() << std::endl;
 }
 
 int main()
 {
-	Span sp = Span(5);
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
-	testAddManyFromRange();
+	Span mySpan = Span(5);
+	mySpan.addNumber(6);
+	mySpan.addNumber(3);
+	mySpan.addNumber(17);
+	mySpan.addNumber(9);
+	mySpan.addNumber(11);
+	std::cout << mySpan.shortestSpan() << std::endl;
+	std::cout << mySpan.longestSpan() << std::endl;
+	testAddManyFromRange(100, true, 5);
+	testAddManyFromRange(100, true);
+	testAddManyFromRange(10000, false);
 
 	return 0;
 }

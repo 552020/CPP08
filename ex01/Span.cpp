@@ -10,9 +10,6 @@ Span::Span(unsigned int N) : maxSize(N)
 	numbers = new std::vector<int>;
 }
 
-// Check if the defaut copy constructor is enough, i.e. if the default copy constructor will do the right thing, which
-// is to copy the vector and not just the pointer to it.
-// https://stackoverflow.com/questions/6849567/does-copy-constructor-of-the-stdcontainers-call-contained-copy-constructors
 Span::Span(const Span &other) : maxSize(other.maxSize)
 {
 	numbers = new std::vector<int>(*other.numbers);
@@ -77,10 +74,8 @@ int Span::longestSpan() const
 		throw std::logic_error("Not enough elements to find a span.");
 	}
 
-	// Make a copy and sort the numbers vector in descending order
 	std::vector<int> sortedNumbers = *numbers;
 	std::sort(sortedNumbers.begin(), sortedNumbers.end());
 
-	// Return the difference between the first and last elements
 	return sortedNumbers.back() - sortedNumbers.front();
 }
