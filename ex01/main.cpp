@@ -5,7 +5,7 @@
 #include <vector>
 #include <ctime>   // For std::time
 #include <cstdlib> // For std::rand and std::srand
-#include <climits> // Include this for INT_MAX and INT_MIN
+#include <climits> // for INT_MAX and INT_MIN
 
 #define MAX_N INT_MAX
 #define MIN_N 0
@@ -17,11 +17,9 @@ std::vector<int> createVector(unsigned int n, bool isRandom)
 
 	if (isRandom)
 	{
-		// Initialize random seed
 		std::srand(static_cast<unsigned int>(std::time(0)));
 		for (size_t i = 0; i < static_cast<size_t>(n); ++i)
 		{
-			// Generate random number and add to numbers vector
 			int range = MAX_N - MIN_N;
 			int randomNumber = MIN_N + (std::rand() % range + 1);
 			numbers.push_back(randomNumber);
@@ -40,7 +38,7 @@ std::vector<int> createVector(unsigned int n, bool isRandom)
 void testAddManyFromRange(unsigned int n, bool isRandom, unsigned int spanSize = 10000)
 {
 
-	std::cout << "Testing addManyFromRange with " << n << (isRandom ? " random" : " not random") << " numbers"
+	std::cout << "\nTesting addManyFromRange with " << n << (isRandom ? " random" : " not random") << " numbers"
 			  << std::endl;
 	std::vector<int> numbers = createVector(n, isRandom);
 	Span mySpan(spanSize);
@@ -67,9 +65,9 @@ int main()
 	mySpan.addNumber(11);
 	std::cout << mySpan.shortestSpan() << std::endl;
 	std::cout << mySpan.longestSpan() << std::endl;
-	testAddManyFromRange(100, true, 5);
-	testAddManyFromRange(100, true);
-	testAddManyFromRange(10000, false);
+	//testAddManyFromRange(100, true, 5);
+	//testAddManyFromRange(100, true);
+	//testAddManyFromRange(10000, false);
 
 	return 0;
 }

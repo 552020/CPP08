@@ -35,7 +35,7 @@ void Span::addNumber(int number)
 {
 	if (numbers->size() >= maxSize)
 	{
-		throw std::out_of_range("It's full. Try again later ...");
+		throw std::out_of_range("Container is full. (addNumber exception)");
 	}
 	numbers->push_back(number);
 }
@@ -44,7 +44,7 @@ int Span::shortestSpan() const
 {
 	if (numbers->size() < 2)
 	{
-		throw std::logic_error("Not enough elements to find a span.");
+		throw std::logic_error("Not enough elements to find a span. (shortestSpan exception)");
 	}
 
 	std::vector<int> sortedNumbers = *numbers;
@@ -70,7 +70,7 @@ int Span::longestSpan() const
 {
 	if (numbers->size() < 2)
 	{
-		throw std::logic_error("Not enough elements to find a span.");
+		throw std::logic_error("Not enough elements to find a span. (longestSpan exception)");
 	}
 
 	std::vector<int> sortedNumbers = *numbers;

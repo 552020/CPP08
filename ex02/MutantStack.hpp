@@ -9,13 +9,8 @@ template< typename T, typename C = std::deque<T> >
 class MutantStack : public std::stack<T, C>
 {
   public:
-	// Default constructor
 	MutantStack() : std::stack<T, C>() {};
-
-	// Copy constructor
 	MutantStack(const MutantStack &other) : std::stack<T, C>(other) {};
-
-	// Copy Assignment operator
 	MutantStack &operator=(const MutantStack &other)
 	{
 		if (this != &other)
@@ -24,10 +19,8 @@ class MutantStack : public std::stack<T, C>
 		}
 		return *this;
 	}
-	// Destructor
 	~MutantStack() {};
-
-	// Usind typedef to define part of the iterators
+	// We need typedef, cause of the main in the subject
 	typedef typename C::const_iterator const_iterator;
 	typedef typename C::const_reverse_iterator const_reverse_iterator;
 	typedef typename C::iterator iterator;
