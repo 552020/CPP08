@@ -10,6 +10,9 @@ Span::Span(unsigned int N) : maxSize(N)
 	numbers = new std::vector<int>;
 }
 
+// Check if the defaut copy constructor is enough, i.e. if the default copy constructor will do the right thing, which
+// is to copy the vector and not just the pointer to it.
+// https://stackoverflow.com/questions/6849567/does-copy-constructor-of-the-stdcontainers-call-contained-copy-constructors
 Span::Span(const Span &other) : maxSize(other.maxSize)
 {
 	numbers = new std::vector<int>(*other.numbers);

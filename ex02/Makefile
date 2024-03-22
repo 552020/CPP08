@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 DEPFLAGS = -MMD -MP
 
 # Target executable name
-TARGET = templates
+TARGET = mutant_stack
 
 # Source and Object Files
 SRCS = main.cpp

@@ -4,10 +4,10 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
 DEPFLAGS = -MMD -MP
 
 # Target executable name
-TARGET = list
+TARGET = stack
 
 # Source and Object Files
-SRCS = list.cpp
+SRCS = stack.cpp
 
 # Create an obj directory if it doesn't exist
 OBJDIR = obj
