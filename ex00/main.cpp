@@ -6,8 +6,8 @@
 
 #define SIZE 5
 
-template <typename Container>
-void initializeContainer(Container &container, int size)
+template <typename C>
+void initializeContainer(C &container, int size)
 {
 	for (int i = 1; i <= size; ++i)
 	{
@@ -17,9 +17,7 @@ void initializeContainer(Container &container, int size)
 
 int main()
 {
-	// Example usage with std::vector
-	// This works from C++11 onwards
-	// std::vector<int> vec = {1, 2, 3, 4, 5};
+	std::cout << "Test 1 - easyFind with vector vec" << std::endl;
 	std::vector<int> vec;
 	initializeContainer(vec, SIZE);
 	int validValue = SIZE - 1;
@@ -29,16 +27,14 @@ int main()
 	std::cout << "Vector: Searching for " << invalidValue << ": "
 			  << (easyFind(vec, invalidValue) ? "Found" : "Not Found") << std::endl;
 
-	// Example usage with std::list
-	// This works from C++11 onwards
-	// std::list<int> lst = {1, 2, 3, 4, 5};
-	std::list<int> lst;
+	std::cout << "Test 2 - easyFindThrow with list lst" << std::endl;
+	std::list<int> lst(SIZE);
 	initializeContainer(lst, SIZE);
 	std::cout << "List: Searching for " << validValue << ": " << (easyFind(lst, validValue) ? "Found" : "Not Found")
 			  << std::endl;
 	std::cout << "List: Searching for " << invalidValue << ": " << (easyFind(lst, invalidValue) ? "Found" : "Not Found")
 			  << std::endl;
-
+	std::cout << "Test 3 - easyFindThrow with vec" << std::endl;
 	try
 	{
 		easyFindThrow(vec, 3);
@@ -59,18 +55,18 @@ int main()
 		std::cout << e.what() << std::endl;
 	}
 
-	// Testing with std::deque
+	std::cout << "Test 4 - easyFindThrowIndex" << std::endl;
 	std::deque<int> deq;
 	initializeContainer(deq, SIZE);
 	std::cout << "Deque: Searching for " << validValue << ": " << (easyFind(deq, validValue) ? "Found" : "Not Found")
 			  << std::endl;
 	std::cout << "Deque: Searching for " << invalidValue << ": "
 			  << (easyFind(deq, invalidValue) ? "Found" : "Not Found") << std::endl;
-
+	int index;
 	try
 	{
-		easyFindThrow(deq, 3);
-		std::cout << "Value found in deque." << std::endl;
+		index = easyFindThrowIndex(deq, 3);
+		std::cout << "Value found in deque at index: " << index << "." << std::endl;
 	}
 	catch (const std::runtime_error &e)
 	{
@@ -80,7 +76,7 @@ int main()
 	try
 	{
 		easyFindThrow(deq, 6);
-		std::cout << "Value found in deque." << std::endl; // This won't execute; just for consistency
+		std::cout << "Value found in deque." << std::endl;
 	}
 	catch (const std::runtime_error &e)
 	{
