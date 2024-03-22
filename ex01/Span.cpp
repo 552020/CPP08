@@ -52,12 +52,12 @@ int Span::shortestSpan() const
 
 	int shortest = sortedNumbers[1] - sortedNumbers[0];
 
-	std::vector<int>::const_iterator it = sortedNumbers.begin();
-	int prev = *it;
+	std::vector<int>::const_iterator it = sortedNumbers.begin() + 1;
 
-	for (it = std::next(it); it != sortedNumbers.end(); ++it)
+	for (; it != sortedNumbers.end(); ++it)
 	{
 		int current = *it;
+		int prev = *(it - 1);
 		int span = current - prev;
 		if (span < shortest)
 			shortest = span;
