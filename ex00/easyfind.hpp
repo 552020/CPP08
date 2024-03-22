@@ -19,7 +19,7 @@ void easyFindThrow(const C &container, int value)
 {
 	typename C::const_iterator it = std::find(container.begin(), container.end(), value);
 
-	if (it == container.end()
+	if (it == container.end())
 	{
 		throw std::runtime_error("Value not found in the container");
 	}
