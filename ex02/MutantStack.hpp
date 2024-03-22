@@ -26,59 +26,45 @@ class MutantStack : public std::stack<T, C>
 	typedef typename C::iterator iterator;
 	typedef typename C::reverse_iterator reverse_iterator;
 
-	// Iterators with typedef
-
 	const_iterator begin() const
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.begin();
 	}
 
 	const_iterator end() const
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.end();
 	}
 
 	const_reverse_iterator rbegin() const
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.rbegin();
 	}
 
 	const_reverse_iterator rend() const
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.rend();
 	}
 
-	// Iterator without typedef
 	iterator begin()
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.begin();
 	}
 
 	iterator end()
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.end();
 	}
 
 	reverse_iterator rbegin()
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.rbegin();
 	}
 
 	reverse_iterator rend()
 	{
-		// We access the protected c class member of the underlying container
 		return this->c.rend();
 	}
 };
 
 #endif
-
-// About the c variable, which represents the underlying container
-// https://en.cppreference.com/w/cpp/container/stack
