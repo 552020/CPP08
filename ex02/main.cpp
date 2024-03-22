@@ -223,6 +223,51 @@ void extraTests()
 	printStack(mstackAssigned);
 }
 
+template <typename Stack>
+void printTopAndSize(const std::string &label, Stack &stack)
+{
+	std::cout << label << " - Top element: " << stack.top() << ", Size: " << stack.size() << std::endl;
+}
+
+void compareStackWithMutantStack()
+{
+	// empty, size, top, push, pop
+	std::stack<int> stdStack;
+	MutantStack<int> mutantStack;
+
+	std::cout << "std::stack is " << (stdStack.empty() ? "empty" : "not empty") << std::endl;
+	std::cout << "MutantStack is " << (mutantStack.empty() ? "empty" : "not empty") << std::endl;
+
+	// Push elements
+	stdStack.push(1);
+	mutantStack.push(1);
+
+	stdStack.push(2);
+	mutantStack.push(2);
+
+	stdStack.push(3);
+	mutantStack.push(3);
+
+	// Print top and size after pushes
+	printTopAndSize("std::stack", stdStack);
+	printTopAndSize("MutantStack", mutantStack);
+
+	// Pop an element
+	stdStack.pop();
+	mutantStack.pop();
+
+	// Print top and size after pop
+	printTopAndSize("std::stack after pop", stdStack);
+	printTopAndSize("MutantStack after pop", mutantStack);
+
+	// Access top element
+	std::cout << "std::stack top element after pop: " << stdStack.top() << std::endl;
+	std::cout << "MutantStack top element after pop: " << mutantStack.top() << std::endl;
+	// Check empty
+	std::cout << "std::stack is " << (stdStack.empty() ? "empty" : "not empty") << std::endl;
+	std::cout << "MutantStack is " << (mutantStack.empty() ? "empty" : "not empty") << std::endl;
+}
+
 int main()
 {
 	MutantStack<int> mstack;
@@ -248,7 +293,8 @@ int main()
 	std::stack<int> s(mstack);
 	// mainWithList();
 	// mainWithVector();
-	extraTests();
+	// extraTests();
+	compareStackWithMutantStack();
 	return 0;
 }
 
