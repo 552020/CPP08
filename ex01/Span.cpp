@@ -61,7 +61,6 @@ int Span::shortestSpan() const
 		int span = current - prev;
 		if (span < shortest)
 			shortest = span;
-		prev = current;
 	}
 
 	return shortest;
