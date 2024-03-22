@@ -8,18 +8,18 @@ template <typename C>
 bool easyFind(const C &container, int value)
 {
 	// https://cplusplus.com/reference/algorithm/find/
-	typename C::const_iterator it = std::find(std::begin(container), std::end(container), value);
+	typename C::const_iterator it = std::find(container.begin(), container.end(), value);
 
-	bool found = it != std::end(container);
+	bool found = it != container.end();
 	return found;
 }
 
 template <typename C>
 void easyFindThrow(const C &container, int value)
 {
-	typename C::const_iterator it = std::find(std::begin(container), std::end(container), value);
+	typename C::const_iterator it = std::find(container.begin(), container.end(), value);
 
-	if (it == std::end(container))
+	if (it == container.end()
 	{
 		throw std::runtime_error("Value not found in the container");
 	}
